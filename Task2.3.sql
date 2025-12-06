@@ -17,7 +17,7 @@ LEFT JOIN teaching_activity as t ON t.teaching_activity_id = p.teaching_activity
 LEFT JOIN employee_activity as ea ON ea.teaching_activity_id = p.teaching_activity_id AND ea.instance_id = p.instance_id
 LEFT JOIN employee as e ON e.employee_id = ea.employee_id
 LEFT JOIN person ON person.person_id = e.person_id
-WHERE i.study_year = '2025'
+WHERE i.study_year = '2025' AND e.employee_id = 3
 GROUP BY 
 l.course_code,
 l.hp,
