@@ -3,6 +3,7 @@ l.hp,
 i.instance_id,
 i.num_students,
 i.study_period,
+i.study_year,
 SUM(CASE WHEN t.activity_name = 'Lecture' THEN t.factor * p.planned_hours ELSE 0 END) as Lecture,
 SUM(CASE WHEN t.activity_name = 'Other Overhead' THEN t.factor * p.planned_hours ELSE 0 END) as OtherOverhead,
 SUM(CASE WHEN t.activity_name = 'Admin' THEN t.factor * p.planned_hours ELSE 0 END) as Admin,
@@ -15,9 +16,11 @@ FROM course_layout as l
 LEFT JOIN course_instance as i ON l.course_id = i.course_id 
 LEFT JOIN planned_activity as p ON p.instance_id = i.instance_id
 LEFT JOIN teaching_activity as t ON t.teaching_activity_id = p.teaching_activity_id
+WHERE i.study_year = '2025'
 GROUP BY 
 l.course_code,
 l.hp,
 i.instance_id,
 i.num_students,
+i.study_year,
 i.study_period;
